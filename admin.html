@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BeautyPlus Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <div id="login-page" class="auth-page">
+      <div class="auth-card">
+        <div class="brand">
+          <span class="brand-mark">B+</span>
+          <span>BeautyPlus Admin</span>
+        </div>
+
+        <h2>Login Admin</h2>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label for="admin-email">Username / Email</label>
+            <input type="text" id="admin-email" placeholder="admin@beautyplus.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" placeholder="••••••••" />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="admin-dashboard" class="dashboard hidden">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">B+</span>
+          <span>BeautyPlus</span>
+        </div>
+
+        <nav>
+          <button class="nav-link active" data-section="overview">Dashboard</button>
+          <button class="nav-link" data-section="treatments">Treatment</button>
+          <button class="nav-link" data-section="therapists">Therapist</button>
+          <button class="nav-link" data-section="schedule">Jadwal</button>
+          <button class="nav-link" data-section="bookings">Booking</button>
+          <button class="nav-link" data-section="customers">Customer</button>
+          <button class="nav-link" data-section="reports">Laporan</button>
+          <button id="logout-btn" class="btn btn-secondary btn-block">Logout</button>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <section id="overview" class="panel active">
+          <h2>Dashboard</h2>
+          <div class="stats-grid">
+            <div class="stat-card stat-card-money">
+              <p>Total Omzet</p>
+              <h3 id="total-omzet">Rp 0</h3>
+              <small>Booking selesai</small>
+            </div>
+            <div class="stat-card stat-card-money">
+              <p>Total Customer</p>
+              <h3 id="total-customers">0</h3>
+              <small>Customer unik</small>
+            </div>
+            <div class="stat-card">
+              <p>Total Booking</p>
+              <h3 id="total-bookings">0</h3>
+            </div>
+            <div class="stat-card">
+              <p>Booking Hari Ini</p>
+              <h3 id="today-bookings">0</h3>
+            </div>
+            <div class="stat-card">
+              <p>Menunggu Konfirmasi</p>
+              <h3 id="pending-bookings">0</h3>
+            </div>
+            <div class="stat-card">
+              <p>Dikonfirmasi</p>
+              <h3 id="confirmed-bookings">0</h3>
+            </div>
+            <div class="stat-card">
+              <p>Selesai</p>
+              <h3 id="completed-bookings">0</h3>
+            </div>
+            <div class="stat-card">
+              <p>Dibatalkan</p>
+              <h3 id="cancelled-bookings">0</h3>
+            </div>
+          </div>
+          <div class="dashboard-finance-box">
+            <div>
+              <h3>Keuangan</h3>
+              <p>Unduh ringkasan omzet dan detail transaksi booking dalam format CSV.</p>
+            </div>
+            <button id="financial-download-btn" class="btn btn-primary">Unduh Keuangan CSV</button>
+          </div>
+        </section>
+
+        <section id="treatments" class="panel">
+          <h2>Kelola Treatment</h2>
+          <form id="treatment-form" class="admin-form">
+            <div class="form-row">
+              <input type="text" id="treatment-name" placeholder="Nama treatment" />
+              <input type="number" id="treatment-price" placeholder="Harga" />
+              <select id="treatment-status">
+                <option value="tersedia">Tersedia</option>
+                <option value="tidak-tersedia">Tidak Tersedia</option>
+              </select>
+              <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
+          </form>
+
+          <div id="treatment-list-admin" class="table-list"></div>
+        </section>
+
+        <section id="therapists" class="panel">
+          <h2>Kelola Therapist</h2>
+          <form id="therapist-form" class="admin-form">
+            <div class="form-row">
+              <input type="text" id="therapist-name" placeholder="Nama therapist" />
+              <input type="text" id="therapist-specialty" placeholder="Spesialis" />
+              <select id="therapist-status">
+                <option value="tersedia">Tersedia</option>
+                <option value="tidak-tersedia">Tidak Tersedia</option>
+              </select>
+              <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
+          </form>
+
+          <div id="therapist-list-admin" class="table-list"></div>
+        </section>
+
+        <section id="schedule" class="panel">
+          <h2>Kelola Jadwal Therapist</h2>
+          <div class="schedule-grid">
+            <div class="schedule-box">
+              <h3>Pengaturan Jam Kerja</h3>
+              <form id="schedule-form" class="schedule-form">
+                <label>Hari kerja</label>
+                <div class="day-checks">
+                  <label><input type="checkbox" name="work-day" value="1" /> Senin</label>
+                  <label><input type="checkbox" name="work-day" value="2" /> Selasa</label>
+                  <label><input type="checkbox" name="work-day" value="3" /> Rabu</label>
+                  <label><input type="checkbox" name="work-day" value="4" /> Kamis</label>
+                  <label><input type="checkbox" name="work-day" value="5" /> Jumat</label>
+                  <label><input type="checkbox" name="work-day" value="6" /> Sabtu</label>
+                  <label><input type="checkbox" name="work-day" value="0" /> Minggu</label>
+                </div>
+                <div class="schedule-fields">
+                  <div><label for="schedule-start">Mulai</label><input id="schedule-start" type="time" /></div>
+                  <div><label for="schedule-end">Selesai</label><input id="schedule-end" type="time" /></div>
+                  <div><label for="schedule-break-start">Istirahat mulai</label><input id="schedule-break-start" type="time" /></div>
+                  <div><label for="schedule-break-end">Istirahat selesai</label><input id="schedule-break-end" type="time" /></div>
+                </div>
+                <button class="btn btn-primary" type="submit">Simpan Jadwal Kerja</button>
+              </form>
+            </div>
+
+            <div class="schedule-box">
+              <h3>Tambah Izin / Libur</h3>
+              <form id="leave-form" class="schedule-form">
+                <label for="leave-date">Tanggal</label>
+                <input id="leave-date" type="date" required />
+                <label for="leave-therapist">Therapist</label>
+                <select id="leave-therapist"></select>
+                <label for="leave-reason">Keterangan</label>
+                <input id="leave-reason" type="text" placeholder="Contoh: Izin / Cuti / Libur" />
+                <button class="btn btn-secondary" type="submit">Tambah Izin</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="schedule-box schedule-section">
+            <h3>Jadwal Therapist</h3>
+            <div id="therapist-schedule-list" class="table-list compact"></div>
+          </div>
+          <div class="schedule-box schedule-section">
+            <h3>Kalender 14 Hari & Booking Terisi</h3>
+            <div id="schedule-calendar" class="table-list compact"></div>
+          </div>
+          <div class="schedule-box schedule-section">
+            <h3>Daftar Izin / Libur</h3>
+            <div id="leave-list" class="table-list compact"></div>
+          </div>
+        </section>
+
+        <section id="bookings" class="panel">
+          <h2>Data Booking</h2>
+          <div id="booking-list-admin" class="table-list"></div>
+        </section>
+
+        <section id="customers" class="panel">
+          <h2>Data Customer</h2>
+          <div id="customer-list-admin" class="table-list"></div>
+        </section>
+
+        <section id="reports" class="panel">
+          <h2>Laporan</h2>
+          <div class="report-box">
+            <p>Laporan booking, treatment, jadwal therapist, dan customer.</p>
+            <button id="report-download-btn" class="btn btn-primary">Unduh Laporan CSV</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+
+    <div id="booking-edit-modal" class="modal hidden">
+      <div class="modal-card">
+        <div class="modal-header"><div><h3>Edit Booking</h3><p id="booking-customer-preview"></p></div><button type="button" id="cancel-edit-booking" class="modal-close">×</button></div>
+        <form id="edit-booking-form" class="schedule-form">
+          <input id="edit-booking-code" type="hidden" />
+          <label for="edit-booking-date">Tanggal</label><input id="edit-booking-date" type="date" required />
+          <label for="edit-booking-time">Jam</label><input id="edit-booking-time" type="time" required />
+          <label for="edit-booking-therapist">Therapist</label><select id="edit-booking-therapist" required></select>
+          <label for="edit-booking-status">Status</label>
+          <select id="edit-booking-status"><option>Menunggu Konfirmasi</option><option>Dikonfirmasi</option><option>Selesai</option><option>Dibatalkan</option></select>
+          <label for="edit-booking-notes">Catatan</label><textarea id="edit-booking-notes" rows="4"></textarea>
+          <div class="modal-actions"><button type="button" id="cancel-edit-booking-2" class="btn btn-secondary">Tutup</button><button type="submit" class="btn btn-primary">Simpan Perubahan</button></div>
+        </form>
+      </div>
+    </div>
+    <script>document.addEventListener("DOMContentLoaded",()=>document.getElementById("cancel-edit-booking-2")?.addEventListener("click",()=>document.getElementById("cancel-edit-booking")?.click()));</script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>
